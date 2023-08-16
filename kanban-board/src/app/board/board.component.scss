@@ -1,0 +1,41 @@
+.task-container {
+  margin-top: 1rem;
+  padding: 1rem;
+
+  .kanban-board {
+    display: flex;
+    gap: 1rem; // Add spacing between columns
+  }
+
+  .kanban-column {
+    flex: 1;
+    background-color: #f4f4f4; // Background color of columns
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Add some shadow
+    height: 600px;
+    overflow: hidden;
+
+    .column-title {
+      margin: 0;
+      font-size: 1.2rem;
+      border-bottom: 1px solid rgb(124, 124, 124);
+      padding: 16px 10px;
+    }
+
+    .task-box {
+      height: calc(100% - 90px);
+      padding: 10px;
+      overflow-y: hidden;
+
+      &:hover {
+        overflow-y: auto;
+      }
+
+      .task-card {
+        background-color: #e0e2ff;
+        padding: 12px 8px;
+        margin: 1px 1px 23px 1px;
+        box-shadow: 0 1px 2px 3px rgb(175 187 255 / 10%);
+      }
+    }
+  }
+}

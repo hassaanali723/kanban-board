@@ -1,0 +1,13 @@
+<div class="task-container">
+  <div class="kanban-board">
+    <div class="kanban-column" *ngFor="let column of statuses">
+      <h2 class="column-title">{{ column }}</h2>
+      <div class="task-box">
+        <div class="task-card" *ngFor="let task of taskGroups[column]">
+          <p><strong>Status:</strong> {{ task.status }}</p>
+          <p>{{ task.todo }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
