@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from 'src/services/taskslist/taskslist.service';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board',
@@ -21,17 +22,53 @@ export class BoardComponent implements OnInit {
     this.taskService.fetchTasks().subscribe(
       (response) => {
         this.tasks = response.todos;
-
-        // Group tasks by status
         this.statuses.forEach(status => {
           this.taskGroups[status] = this.tasks.filter(task => task.status === status);
         });
 
-        console.log('Fetched tasks:', this.tasks);
       },
       (error) => {
         console.error('Error fetching tasks:', error);
       }
     );
   }
+
+  onDrop(event: CdkDragDrop<any[]>, targetColumnId: string) {
+    const task = event.item.data;
+    const sourceColumnId = event.previousContainer.id;
+
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+
+      task.status = targetColumnId;
+    }
+  }
+
+  getTaskStatusClass(status: string): string {
+    
+    switch (status) {
+      case 'To Do':
+        return 'task-card todo';
+      case 'Ready':
+        return 'task-card ready';
+      case 'In Progress':
+        return 'task-card in-progress';
+      case 'Ready for Testing':
+        return 'task-card testing';
+      case 'Done':
+        return 'task-card done';
+      default:
+        return 'task-card';
+    }
+  }
+
+  
+
 }
