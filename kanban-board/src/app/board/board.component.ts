@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from 'src/services/taskslist/taskslist.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { AddTaskDialogComponent } from '../add-task-dialog/add-task-dialog.component';
+
 
 @Component({
   selector: 'app-board',
@@ -12,7 +15,7 @@ export class BoardComponent implements OnInit {
   statuses: string[] = ['To Do', 'Ready', 'In Progress', 'Ready for Testing', 'Done'];
   taskGroups: { [key: string]: any[] } = {}; // Use an object to store grouped tasks
 
-  constructor(private taskService: TaskService) {}
+  constructor(private dialog: MatDialog, private taskService: TaskService) {}
 
   ngOnInit() {
     this.fetchTasks();
@@ -50,6 +53,17 @@ export class BoardComponent implements OnInit {
       task.status = targetColumnId;
     }
   }
+
+  openAddTaskDialog(column: string): void {
+    const dialogRef = this.dialog.open(AddTaskDialogComponent, {
+      width: '300px',
+      data: column
+    });
+  
+    dialogRef.afterClosed().subscribe((newTaskTitle:any) => {
+      console.log(newTaskTitle)
+  })
+    }
 
   getTaskStatusClass(status: string): string {
     

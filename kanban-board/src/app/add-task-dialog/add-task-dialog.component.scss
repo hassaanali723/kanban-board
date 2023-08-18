@@ -1,0 +1,24 @@
+/* Add your custom styles here */
+.custom-input {
+    /* Add your input field styles */
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .custom-button {
+    /* Add your button styles */
+    background-color: #673ab7;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .custom-dialog-actions{
+    display: flex;
+    justify-content: center; // Center-align horizontally
+    gap: 10px; // Add some spacing between buttons
+  }
