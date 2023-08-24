@@ -8,7 +8,12 @@
     </h2>
       <div class="task-box">
         <div class="task-card" *ngFor="let task of taskGroups[column]" [ngClass]="getTaskStatusClass(task.status)" cdkDrag [cdkDragData]="task">
+          <div class="task-items">
           <p><strong>Status:</strong> {{ task.status }}</p>
+          <button mat-icon-button class="delete-icon" (click)="deleteTask(task)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
           <p>{{ task.todo }}</p>
         </div>
       </div>

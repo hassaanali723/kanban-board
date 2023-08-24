@@ -60,9 +60,35 @@ export class BoardComponent implements OnInit {
       data: column
     });
   
-    dialogRef.afterClosed().subscribe((newTaskTitle:any) => {
-      console.log(newTaskTitle)
-  })
+    dialogRef.afterClosed().subscribe((newTaskTitle: string) => {
+      if (newTaskTitle) {
+        // Add the new task to the appropriate column
+        this.taskGroups[column].push({
+          id: this.tasks.length + 1,
+          todo: newTaskTitle,
+          status: column,
+          completed: false,
+          userId: 1,
+        });
+      }
+    });
+    }
+
+    deleteTask(task: any): void {
+      this.taskService.deleteTask(task.id).subscribe(
+        (res) => {
+          // Remove the deleted task from the taskGroups
+          const index = this.taskGroups[task.status].indexOf(task);
+          if (index !== -1) {
+            this.taskGroups[task.status].splice(index, 1);
+          }
+
+          console.log(res)
+        },
+        (error) => {
+          console.error('Error deleting task:', error);
+        }
+      );
     }
 
   getTaskStatusClass(status: string): string {

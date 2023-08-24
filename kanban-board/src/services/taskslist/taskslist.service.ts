@@ -25,4 +25,9 @@ export class TaskService {
       })
     );
   }
+
+  deleteTask(taskId: number): Observable<void> {
+    const deleteUrl = `${this.apiUrl}/${taskId}`;
+    return this.http.delete<void>(deleteUrl);
+  }
 }

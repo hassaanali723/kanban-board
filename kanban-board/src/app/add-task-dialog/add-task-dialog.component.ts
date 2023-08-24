@@ -22,6 +22,12 @@ export class AddTaskDialogComponent {
     });
   }
 
+  onAddClick(): void {
+    const newTaskTitle = this.form.get('newTaskTitle')?.value;
+    console.log(newTaskTitle);
+    this.dialogRef.close(newTaskTitle);
+  }
+
   onCancelClick(): void {
     this.dialogRef.close();
   }
