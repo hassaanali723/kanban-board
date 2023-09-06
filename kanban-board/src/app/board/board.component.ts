@@ -3,6 +3,8 @@ import { TaskService } from 'src/services/taskslist/taskslist.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTaskDialogComponent } from '../add-task-dialog/add-task-dialog.component';
+import { ColumnAddDialogComponent } from '../column-add-dialog/column-add-dialog.component';
+import { ColumnService } from 'src/services/columnslist/columnslist.service';
 
 
 @Component({
@@ -12,10 +14,14 @@ import { AddTaskDialogComponent } from '../add-task-dialog/add-task-dialog.compo
 })
 export class BoardComponent implements OnInit {
   tasks: any[] = [];
-  statuses: string[] = ['To Do', 'Ready', 'In Progress', 'Ready for Testing', 'Done'];
+  statuses: string[] = [];
   taskGroups: { [key: string]: any[] } = {}; // Use an object to store grouped tasks
 
-  constructor(private dialog: MatDialog, private taskService: TaskService) {}
+  constructor(private columnService: ColumnService,private dialog: MatDialog, private taskService: TaskService) {
+    this.columnService.columns$.subscribe((columns) => {
+      this.statuses = columns;
+    });
+  }
 
   ngOnInit() {
     this.fetchTasks();
@@ -108,6 +114,15 @@ export class BoardComponent implements OnInit {
         return 'task-card';
     }
   }
+
+
+  deleteColumn(column: string): void {
+    const index = this.statuses.indexOf(column);
+    if (index !== -1) {
+      this.statuses.splice(index, 1);
+    }
+  }
+  
 
   
 

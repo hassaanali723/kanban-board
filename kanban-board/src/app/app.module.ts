@@ -13,16 +13,21 @@ import { AddTaskDialogComponent } from './add-task-dialog/add-task-dialog.compon
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms';
+import { ColumnAddDialogComponent } from './column-add-dialog/column-add-dialog.component'; 
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     BoardComponent,
-    AddTaskDialogComponent
+    AddTaskDialogComponent,
+    ColumnAddDialogComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     MatToolbarModule,
     HttpClientModule,
@@ -31,7 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     MatFormFieldModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
