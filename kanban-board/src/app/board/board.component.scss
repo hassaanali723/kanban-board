@@ -5,6 +5,11 @@
   .kanban-board {
     display: flex;
     gap: 1rem; // Add spacing between columns
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column; 
+      align-items: center;
+    }
   }
 
   .kanban-column {
@@ -36,6 +41,7 @@
       .delete-icon{
         margin: 0px 5px;
       }
+
     }
 
    
@@ -121,6 +127,8 @@
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
               0 8px 10px 1px rgba(0, 0, 0, 0.14),
               0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  background-color: #f4f4f4;
+  overflow: hidden;
 }
 
 .cdk-drag-placeholder {

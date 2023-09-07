@@ -16,6 +16,8 @@ export class BoardComponent implements OnInit {
   tasks: any[] = [];
   statuses: string[] = [];
   taskGroups: { [key: string]: any[] } = {}; // Use an object to store grouped tasks
+  isDraggingTask = false; // Initialize this flag to false
+isDraggingColumn = false; // Initialize this flag to false
 
   constructor(private columnService: ColumnService,private dialog: MatDialog, private taskService: TaskService) {
     this.columnService.columns$.subscribe((columns) => {
@@ -25,6 +27,22 @@ export class BoardComponent implements OnInit {
 
   ngOnInit() {
     this.fetchTasks();
+  }
+
+  onColumnDragEntered(columnIndex: number) {
+    // Column is being dragged over
+    this.isDraggingColumn = true;
+  }
+  
+  // onColumnDragExited() {
+  //   // Column is no longer being dragged over
+  //   this.isDraggingColumn = false;
+  // }
+
+
+
+  onColumnDrop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.statuses, event.previousIndex, event.currentIndex);
   }
 
   fetchTasks() {

@@ -1,6 +1,6 @@
 <div class="task-container">
-  <div class="kanban-board" cdkDropListGroup>
-    <div class="kanban-column" *ngFor="let column of statuses" cdkDropList [cdkDropListData]="taskGroups[column]" (cdkDropListDropped)="onDrop($event, column)">
+  <div class="kanban-board" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="onColumnDrop($event)" cdkDropListGroup>
+    <div class="kanban-column" *ngFor="let column of statuses; let columnIndex = index" cdkDrag cdkDropList [cdkDropListData]="taskGroups[column]" (cdkDropListDropped)="onDrop($event, column)">
       <div class="column-header">
         <h2 class="column-title">{{ column }}
          

@@ -14,4 +14,12 @@ export class ColumnService {
     currentColumns.push(columnName);
     this.columnsSubject.next(currentColumns);
   }
+
+  getColumns(): string[] {
+    return this.columnsSubject.value;
+  }
+
+  updateColumns(columns: string[]): void {
+    this.columnsSubject.next(columns);
+  }
 }
